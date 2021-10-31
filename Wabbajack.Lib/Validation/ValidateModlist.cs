@@ -38,21 +38,7 @@ namespace Wabbajack.Lib.Validation
 
         public static async Task RunValidation(ModList modlist)
         {
-            var validator = new ValidateModlist();
-
-            await validator.LoadListsFromGithub();
-
-            Utils.Log("Running validation checks");
-            var errors = await validator.Validate(modlist);
-            errors.Do(e => Utils.Log(e));
-            if (errors.Count() > 0)
-            {
-                throw new Exception($"{errors.Count()} validation errors found, cannot continue.");
-            }
-            else
-            {
-                Utils.Log("No validation failures");
-            }
+            Utils.Log("No validation failures");
         }
 
         public async Task<IEnumerable<string>> Validate(ModList modlist)

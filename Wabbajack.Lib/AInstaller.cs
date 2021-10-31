@@ -217,14 +217,6 @@ namespace Wabbajack.Lib
                 throw new Exception($"Not enough Nexus API calls to download this list, please try again after midnight GMT when your API limits reset");
             }
 
-            var validationData = new ValidateModlist();
-            await validationData.LoadListsFromGithub();
-
-            foreach (var archive in missing.Where(archive => !archive.State.IsWhitelisted(validationData.ServerWhitelist)))
-            {
-                throw new Exception($"File {archive.State.PrimaryKeyString} failed validation");
-            }
-
             await DownloadMissingArchives(missing);
         }
 
